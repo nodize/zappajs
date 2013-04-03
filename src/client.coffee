@@ -61,7 +61,8 @@ skeleton = ->
 
     context.share = (channel,socket,cb) ->
       zappa_prefix = settings.zappa_prefix
-      $.getJSON zappa_prefix+"/socket/#{channel}/#{socket.socket.sessionid}", cb
+      if jQuery
+        jQuery.getJSON zappa_prefix+"/socket/#{channel}/#{socket.socket.sessionid}", cb
 
     route = (r) ->
       ctx = {app}
@@ -84,7 +85,9 @@ skeleton = ->
         context.share '__local', context.socket, (data) ->
           context.key = data.key
 
-    $(-> app.run '#/') if app?
+    if app?
+      jQuery ->
+        app.run '#/'
 
 @build = (version, settings) ->
   String(skeleton)

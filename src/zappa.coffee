@@ -248,12 +248,10 @@ zappa.app = (func,options={}) ->
   context.view = (obj) ->
     for k, v of obj
       ext = path.extname k
-      p = path.join app.get('views'), k
-      # I'm not even sure this is needed -- Express doesn't ask for it
-      zappa_fs[p] = v
+      zappa_fs[p] = k
       if not ext
         ext = '.' + app.get 'view engine'
-        zappa_fs[p+ext] = v
+        zappa_fs[k+ext] = v
     return
 
   context.engine = (obj) ->
