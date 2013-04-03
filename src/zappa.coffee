@@ -248,7 +248,7 @@ zappa.app = (func,options={}) ->
   context.view = (obj) ->
     for k, v of obj
       ext = path.extname k
-      zappa_fs[p] = k
+      zappa_fs[k] = v
       if not ext
         ext = '.' + app.get 'view engine'
         zappa_fs[k+ext] = v
